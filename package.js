@@ -1,6 +1,6 @@
 Package.describe({
   summary: "A roles based account management system using bootstrap 3",
-  version: "0.3.2",
+  version: "0.3.3",
   name: "apinf:accounts-admin-ui",
   git: "https://github.com/apinf/meteor-accounts-admin-ui-bootstrap-3.git"
 });
