@@ -3,7 +3,7 @@ Template.updateRolesModalInner.helpers({
 		return Roles.getAllRoles();
 	},
 	adminRole: function() {
-		return this.name === 'admin';
+		return this._id === 'admin';
 	}
 });
 
@@ -14,7 +14,7 @@ Template.updateRolesModalInner.events({
 			if (error) {
 				// optionally use a meteor errors package
 				if (typeof Errors === "undefined")
-					Log.error('Error: ' + error.reason);
+					console.error('Error: ' + error.reason);
 				else {
 					Errors.throw(error.reason);
 				}
@@ -24,13 +24,13 @@ Template.updateRolesModalInner.events({
 	},
 
 	'click .remove-role' : function(event, template) {
-		var role = this.name;
+		var role = this._id;
 
 		Meteor.call('removeRole', role, function(error) {
 			if (error) {
 				// optionally use a meteor errors package
 				if (typeof Errors === "undefined")
-					Log.error('Error: ' + error.reason);
+					console.error('Error: ' + error.reason);
 				else {
 					Errors.throw(error.reason);
 				}
@@ -52,7 +52,7 @@ Template.updateRolesModalInner.events({
 				if (error) {
 					// optionally use a meteor errors package
 					if (typeof Errors === "undefined")
-						Log.error('Error: ' + error.reason);
+						console.error('Error: ' + error.reason);
 					else {
 						Errors.throw(error.reason);
 					}

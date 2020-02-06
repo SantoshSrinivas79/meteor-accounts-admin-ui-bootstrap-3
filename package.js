@@ -8,14 +8,11 @@ Package.describe({
 Package.onUse(function (api) {
 	api.versionsFrom('1.2.1');
 	api.use('templating', 'client');
-	api.use('apinf:first-admin@0.1.2', 'server');
-	api.use('alanning:roles@1.2.11', ['client', 'server']);
-	api.use(['accounts-ui@1.0.0',
-		'accounts-password@1.3.0',
-		'kurounin:pagination-blaze@1.0.2',
+	api.use('alanning:roles', ['client', 'server']);
+	api.use(['accounts-ui',
+		'accounts-password',
+		'kurounin:pagination-blaze',
 		'session',
-		// 'apinf:bootstrap',
-                'twbs:bootstrap@3.3.6',
 		'underscore'
 	]);
 
@@ -44,4 +41,9 @@ Package.onUse(function (api) {
 		'server/publish.js',
 		'server/startup.js'
 	], 'server');
+
+	api.use([
+		'tracker',
+		'check'
+	], ['client', 'server']);	
 });

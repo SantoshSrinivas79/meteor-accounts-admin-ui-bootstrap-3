@@ -2,6 +2,8 @@
 	<div id="updateaccount" class="modal" tabindex="-1" data-width="760" style="display:none;">
 		<div class="modal-dialog">
 			<div class="modal-content">
+			  {{> errors}}
+
 				{{> updateAccountModalInner}}
 			</div>
 		</div>
@@ -20,9 +22,9 @@
           <input data-user-id="{{_id}}" class="form-control admin-user-info" name="username" value="{{username}}" placeholder="Enter new user name">
         </div>
 			</div>
-			{{#if roles}}
+			{{#if userInScopeRoles}}
 				<ul class="list-group">
-					{{#each roles}}
+					{{#each userInScopeRoles}}
 						<li class="list-group-item">
 							<button data-user-id="{{../_id}}" class="btn btn-danger btn-xs remove-role" type="button">Remove</button>
 							<span class="pull-right">{{this}}</span>

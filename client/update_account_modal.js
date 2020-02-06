@@ -22,11 +22,21 @@ Template.updateAccountModalInner.helpers({
 		return Session.get('userInScope');
 	},
 
+	userInScopeRoles: function() {
+		return Roles.getRolesForUser(Session.get('userInScope'));
+	},
+
 	unsetRoles: function() {
-		var allRoles = _.pluck(Roles.getAllRoles().fetch(), "name");
-		if (!this.roles)
+		// if (!Roles.getAllRoles().fetch())
+		// 	return;
+
+		var allRoles = _.pluck(Roles.getAllRoles().fetch(), "_id");
+		var roles = Roles.getRolesForUser(Session.get('userInScope'));
+
+		if (!roles)
 			return allRoles;
-		return _.difference(allRoles, this.roles);
+
+		return _.difference(allRoles, roles);
 	}
 });
 
@@ -38,7 +48,7 @@ Template.updateAccountModalInner.events({
 			if (error) {
 				// optionally use a meteor errors package
 				if (typeof Errors === "undefined")
-					Log.error('Error: ' + error.reason);
+					console.error('Error: ' + error.reason);
 				else {
 					Errors.throw(error.reason);
 				}
@@ -57,7 +67,7 @@ Template.updateAccountModalInner.events({
 			if (error) {
 				// optionally use a meteor errors package
 				if (typeof Errors === "undefined")
-					Log.error('Error: ' + error.reason);
+					console.error('Error: ' + error.reason);
 				else {
 					Errors.throw(error.reason);
 				}
@@ -76,7 +86,7 @@ Template.updateAccountModalInner.events({
 		Meteor.call('updateUserInfo', userId, ele.name, ele.value, function(error) {
 			if (error)
 			{
-				if (typeof Errors === "undefined") Log.error('Error: ' + error.reason);
+				if (typeof Errors === "undefined") console.error('Error: ' + error.reason);
 				else Errors.throw(error.reason);
 				return;
 			}

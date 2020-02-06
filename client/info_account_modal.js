@@ -24,11 +24,13 @@ Template.infoAccountModalInner.helpers({
 
 	rolePairs: function() {
 		var pairs = [];
-		if (!this.roles)
+		var roles = Roles.getRolesForUser(Session.get('userInScope'));
+		
+		if (!roles)
 			pairs.push({key: 'Roles', value: 'None'});
 
-		for (var role in this.roles) {
-			var r = this.roles[role];
+		for (var role in roles) {
+			var r = roles[role];
 			if (role === '0') {
 				pairs.push({key: 'Roles', value: r});
 			} else {
